@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": "tsc"
   },
   "devDependencies": {
     "@swc-node/register": "^1.8.0",
