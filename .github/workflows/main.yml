@@ -20,9 +20,14 @@ jobs:
         with:
           driver-opts: |
             network=host
+      - name: Test
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          target: test
+          load: true # Allows the next step to reuse cache
       - name: Build
         uses: docker/build-push-action@v5
         with:
           context: .
-          target: app
-          load: true
+          target: test
