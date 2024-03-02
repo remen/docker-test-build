@@ -1,18 +1,20 @@
 import * as net from 'net';
 
-describe('Hello world', () => {
-  it('works', () => {
-    const socket = new net.Socket({});
-    socket.connect(
-      { autoSelectFamily: false, port: 5431, host: 'localhost' },
-      () => {
-        console.log('Socket established');
-      },
-    );
-    socket.on('error', (err) => {
-      console.error(err);
-    });
-
-    socket.resetAndDestroy();
+describe('Connection to localhost:5432', () => {
+  it('succeeds', async () => {
+    await attemptConnection('localhost', 5432);
   });
 });
+
+async function attemptConnection(host: string, port: number): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const socket = new net.Socket({});
+    socket.connect({ host: host, port: port, autoSelectFamily: false }, () => {
+      socket.resetAndDestroy();
+      resolve();
+    });
+    socket.once('error', (err) => {
+      reject(err);
+    });
+  });
+}
