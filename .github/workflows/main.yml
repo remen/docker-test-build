@@ -9,24 +9,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      -
-        name: Checkout
+      - name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Docker compose
+      - name: cwd
+        run: pwd
+      - name: Docker compose
         run: docker compose up -d
-      -
-        name: Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Build
+      - name: Build
         uses: docker/build-push-action@v5
         with:
           context: .
           target: build
           load: true
-      -
-        name: Push
+      - name: Push
         uses: docker/build-push-action@v5
         with:
           context: .
