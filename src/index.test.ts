@@ -1,8 +1,8 @@
 import * as net from 'net';
 
-describe('Connection to localhost:5432', () => {
+describe('Connection to postgres:5432', () => {
   it('succeeds', async () => {
-    await attemptConnection('localhost', 5432);
+    await attemptConnection('postgres', 5432);
   });
 });
 
